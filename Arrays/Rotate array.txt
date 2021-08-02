@@ -1,0 +1,97 @@
+Question-
+Given an unsorted array arr[] of size N, rotate it by D elements (clockwise). 
+Constraints-
+1 <= T <= 200
+1 <= N <= 107
+1 <= D <= N
+0 <= arr[i] <= 105
+
+Program- for D<=N
+#include<iostream>
+using namespace std;
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    int a[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>a[i];
+	    }
+	    int d;
+	    cin>>d;
+	    // code logic
+	    for(int i=0;i<d;i++)
+	    {
+	        int j=0,temp=a[0];
+	        while(j<n-1)
+	        {
+	            a[j]=a[j+1];
+	            j++;
+	        }
+	        a[j]=temp;
+	    }
+	    for(int i=0;i<n;i++)
+	    {
+	        cout<<a[i]<<" ";
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}
+-------------------------------------------------------------------
+Small trick for rotating arrays:
+i = ith iteration
+D = number of elements to rotate
+N = size of array
+
+To handle large D values, before rotating use-
+if(D>N)
+D %= N;
+
+For left rotate-
+arr[i] = arr[(i+D)%N]
+
+For right rotate-
+arr[i] = arr[(i+N-D)%N]
+
+Program-
+using namespace std;
+
+void rotateArry(int a[],int n,int d){
+    int newArry[n];
+
+    for (int i = 0; i < n; i++)
+    {
+    	int newIndex = (i+n-d)%n;
+    	newArry[newIndex]=a[i];
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+    	cout<<newArry[i]<<" ";
+    }
+}
+
+int main() {
+	int t,n,d;
+	cin>>t;
+	
+	while(t--){
+	    cin>>n>>d;
+	    int a[n];
+	    
+	    for(int i=0;i<n;i++){
+	        cin>>a[i];
+	    }
+	    
+	    rotateArry(a,n,d);
+	    cout<<"\n";
+	}
+	
+	return 0;
+}
